@@ -9,6 +9,8 @@ import json
 ################################################################################
 def search_csv_file(*search_terms):
     rows = []
+    rows_primary = []
+    rows_secondary = []
 
     with open('output.csv', 'r', newline='') as file:
 
@@ -22,8 +24,14 @@ def search_csv_file(*search_terms):
             if search_terms is None:
                 rows.append(row)
 
-            elif all(term.lower() in title or term.lower() in description for term in search_terms):
-                rows.append(row)
+            elif all(term.lower() in title for term in search_terms):
+                rows_primary.append(row)
+
+            elif all(term.lower() in description for term in search_terms):
+                rows_secondary.append(row)
+
+    if len(rows_primary) > 0 or len(rows_secondary) > 0:
+        rows = rows_primary + rows_secondary
 
     return rows
 

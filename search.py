@@ -12,7 +12,7 @@ def search_csv_file(*search_terms):
     rows_primary = []
     rows_secondary = []
 
-    with open('output.csv', 'r', newline='') as file:
+    with open('docs.csv', 'r', newline='') as file:
 
         reader = csv.DictReader(file)
 
